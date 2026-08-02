@@ -1,0 +1,343 @@
+import * as React from "react";
+import sqlIcon from "@/assets/sql-icon.png";
+import uiuxIcon from "@/assets/uiux-icon.png";
+import genaiIcon from "@/assets/genai-icon.png";
+import promptIcon from "@/assets/prompt-icon.png";
+import certStackQueueJava from "@/assets/java-cer.jpg";
+import certNovitech from "@/assets/fuiistack-cer.jpg";
+import certKaggle from "@/assets/python-cer.jpg";
+import certIIT from "@/assets/flutter-cer.jpg";
+import { Briefcase, Calendar, MapPin, Award, ChevronRight, GraduationCap, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import FlipCard from "./FlipCard";
+
+const ExperienceFlip = () => {
+  const [flippedCerts, setFlippedCerts] = React.useState<Record<number, boolean>>({});
+
+  const toggleCertFlip = (id: number) => {
+    setFlippedCerts((s) => ({ ...s, [id]: !s[id] }));
+  };
+
+  const experiences = [
+    {
+      id: 1,
+      role: "Java Intern",
+      organization: "Stack Queue Educational Institution",
+      period: "May 2024 - Jul 2024",
+      location: "Offline",
+      type: "Internship",
+      description: "Hands-on Java internship focusing on core Java projects and practical exercises.",
+      responsibilities: [
+        "Worked on Java OOP projects and practical exercises",
+        "Implemented data structures and algorithms for project tasks",
+        "Collaborated with mentors for code reviews and improvements"
+      ],
+      outcomes: [
+        "Completed multiple hands-on Java assignments",
+        "Improved problem-solving and Java fundamentals"
+      ],
+      tech: ["Java", "OOP", "Data Structures"],
+      image: certStackQueueJava,
+      certificateImage: certStackQueueJava,
+      current: false
+    },
+    {
+      id: 2,
+      role: "Full Stack Development Intern",
+      organization: "Novi Tech R&D",
+      period: "Jan 18 - Feb 18",
+      location: "Online",
+      type: "Internship",
+      description: "Worked on modern web applications using cutting-edge technologies and agile methodologies.",
+      responsibilities: [
+        "Developed responsive web applications using React and Node.js",
+        "Implemented RESTful APIs with proper authentication and authorization",
+        "Collaborated with design team to create pixel-perfect UI components",
+        "Participated in code reviews and maintained high code quality standards"
+      ],
+      outcomes: [
+        "Delivered 3 production-ready features with 99.9% uptime",
+        "Reduced page load times by 45% through optimization techniques",
+        "Mentored 2 junior developers on modern development practices"
+      ],
+      tech: ["React", "Node.js", "MongoDB", "REST API", "Git"],
+      certificateImage: certNovitech,
+      current: false
+    },
+    {
+      id: 3,
+      role: "Python Development Intern",
+      organization: "Besant Technologies",
+      period: "Jan 25 - Feb 25 2025",
+      location: "Online",
+      type: "Internship",
+      description: "Focused on Python programming, automation, and data analysis projects.",
+      responsibilities: [
+        "Developed automation scripts for data processing and analysis",
+        "Built web scrapers and data collection tools using Python libraries",
+        "Created interactive dashboards using Tkinter and data visualization libraries",
+        "Implemented machine learning models for predictive analysis"
+      ],
+      outcomes: [
+        "Automated 5 manual processes, saving 20+ hours weekly",
+        "Built ML model with 92% accuracy for data prediction",
+        "Created comprehensive documentation and training materials"
+      ],
+      tech: ["Python", "Pandas", "Tkinter", "Machine Learning", "Data Analysis"],
+      certificateImage: certKaggle,
+      current: false
+    },
+    {
+      id: 4,
+      role: "Flutter Workshop Participant",
+      organization: "Gateway Solutions",
+      period: "Aug 2023",
+      location: "Offline",
+      type: "Workshop",
+      description: "Intensive Flutter development workshop focusing on cross-platform mobile app development.",
+      responsibilities: [
+        "Built complete mobile applications from scratch using Flutter",
+        "Learned state management patterns and best practices",
+        "Implemented Firebase integration for backend services",
+        "Created responsive UI components for different screen sizes"
+      ],
+      outcomes: [
+        "Completed 3 functional mobile apps during the workshop",
+        "Gained proficiency in Dart programming language",
+        "Networked with 50+ fellow developers and industry experts"
+      ],
+      tech: ["Flutter", "Dart", "Firebase", "Mobile UI/UX"],
+      certificateImage: certIIT,
+      current: false
+    }
+  ];
+
+  const getTypeColor = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'internship':
+        return 'bg-intern-accent/30 text-intern-accent border-intern-accent/40';
+      case 'project work':
+        return 'bg-project-accent/20 text-project-accent border-project-accent/30';
+      case 'workshop':
+        return 'bg-skill-bg/40 text-skill-bg border-skill-bg/30';
+      default:
+        return 'bg-muted text-muted-foreground';
+    }
+  };
+
+  const techIcons = [
+    { name: "HTML5", icon: "🌐" },
+    { name: "CSS3", icon: "🎨" },
+    { name: "Full-Stack Python", icon: "🌐" },
+    { name: "React", icon: "⚛️" },
+    { name: "SQL", icon: sqlIcon },
+    { name: "Python", icon: "🐍" },
+    { name: "Java", icon: "☕" },
+    { name: "Flutter", icon: "📱" },
+    { name: "UI/UX", icon: uiuxIcon },
+    { name: "Firebase", icon: "🔥" },
+    { name: "AWS", icon: "☁️" },
+    { name: "JavaScript", icon: "🟨" },
+    { name: "Gen AI", icon: genaiIcon },
+    { name: "Prompt Engineering", icon: promptIcon }
+  ];
+
+  const toolsIcons = [
+    { name: "VS Code", icon: "💻" },
+    { name: "Jupyter Notebook", icon: "📓" },
+    { name: "Android Studio", icon: "🤖" },
+    { name: "Figma", icon: "🎭" },
+    { name: "MySQL Workbench", icon: "🗄️" },
+    { name: "Git/GitHub", icon: "📂" },
+    { name: "Supabase", icon: "🔐" },
+    { name: "Vercel", icon: "▲" },
+    { name: "Netlify", icon: "🚀" },
+    { name: "Render", icon: "⚙️" },
+    { name: "Cloudflare", icon: "🛡️" }
+  ];
+
+  return (
+    <section id="experience" className="py-20 gradient-section">
+      <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16 animate-fade-in-up">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              Experience & Learning Journey
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Click on any experience card to flip and see detailed responsibilities, achievements, and technologies used.
+            </p>
+          </div>
+
+          {/* Experience Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {experiences.map((exp, index) => (
+              <div key={exp.id} className="animate-fade-in-up" style={{ animationDelay: `${0.1 * index}s` }}>
+                <FlipCard
+                  front={
+                    <div className="h-full flex flex-col p-6">
+                      {/* Experience Header */}
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="w-14 h-14 rounded-xl gradient-hero flex items-center justify-center flex-shrink-0">
+                          {exp.type === 'Internship' ? (
+                            <GraduationCap size={24} className="text-white" />
+                          ) : exp.type === 'Workshop' ? (
+                            <Users size={24} className="text-white" />
+                          ) : (
+                            <Briefcase size={24} className="text-white" />
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-foreground mb-1">{exp.role}</h3>
+                          <h4 className="text-base font-semibold text-muted-foreground mb-2">{exp.organization}</h4>
+                        </div>
+                      </div>
+
+                      {/* Details */}
+                      <div className="flex flex-col gap-2 mb-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Calendar size={14} />
+                          {exp.period}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin size={14} />
+                          {exp.location}
+                        </div>
+                      </div>
+
+                      {/* Type Badge */}
+                      <div className="mb-4">
+                        <Badge className={`${getTypeColor(exp.type)} border`}>{exp.type}</Badge>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3 flex-1">
+                        {exp.description}
+                      </p>
+
+                      <p className="text-xs text-muted-foreground text-center">Click to see details</p>
+                    </div>
+                  }
+                  back={
+                    <div className="h-full flex flex-col">
+                      {/* Certificate image */}
+                      {exp.certificateImage && (
+                        <div className="mb-4 flex items-center justify-center">
+                          <img
+                            src={exp.certificateImage}
+                            alt={`${exp.organization} certificate`}
+                            onClick={() => exp.id === 4 && toggleCertFlip(exp.id)}
+                            className={`max-w-full max-h-48 object-contain rounded shadow-lg transition-transform duration-500 cursor-pointer
+                              ${exp.id === 4 ? 'hover:scale-105' : ''}
+                              ${exp.id === 4 && flippedCerts[exp.id] ? 'rotate-y-180' : ''}`}
+                            style={{ transformStyle: exp.id === 4 ? 'preserve-3d' : 'flat' }}
+                          />
+                        </div>
+                      )}
+
+                      <h3 className="text-lg font-bold text-foreground mb-2">{exp.role}</h3>
+                      <p className="text-sm text-muted-foreground mb-4">{exp.organization}</p>
+
+                      {/* Technologies */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-semibold text-primary mb-2">Technologies:</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {exp.tech.map((tech) => (
+                            <Badge key={tech} variant="secondary" className="text-xs bg-skill-bg/40">{tech}</Badge>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Responsibilities */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-semibold text-primary mb-2 flex items-center gap-1">
+                          <ChevronRight size={14} />
+                          Key Responsibilities:
+                        </h4>
+                        <ul className="space-y-1">
+                          {exp.responsibilities.slice(0, 3).map((responsibility, idx) => (
+                            <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0 mt-1.5"></div>
+                              <span>{responsibility}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Achievements */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-semibold text-primary mb-2 flex items-center gap-1">
+                          <Award size={14} />
+                          Key Achievements:
+                        </h4>
+                        <ul className="space-y-1">
+                          {exp.outcomes.slice(0, 3).map((outcome, idx) => (
+                            <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-project-accent/60 flex-shrink-0 mt-1.5"></div>
+                              <span>{outcome}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  }
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Technology Known Section */}
+          <div className="mt-16 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-white mb-4">Technology Known</h3>
+              <p className="text-lg text-muted-foreground">Technologies and frameworks I work with</p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              {techIcons.map((tech, index) => (
+                <div
+                  key={tech.name}
+                  className="glass-effect rounded-lg p-4 text-center transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-purple-500/30"
+                  style={{ animationDelay: `${0.1 * index}s` }}
+                >
+                  {typeof tech.icon === 'string' && tech.icon.includes('.png') ? (
+                    <div className="w-8 h-8 mx-auto mb-2">
+                      <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                    </div>
+                  ) : (
+                    <div className="text-3xl mb-2">{tech.icon}</div>
+                  )}
+                  <p className="text-sm font-medium text-white">{tech.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tools Known Section */}
+          <div className="mt-16 animate-fade-in-up" style={{ animationDelay: '1.0s' }}>
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-white mb-4">Tools & Platforms</h3>
+              <p className="text-lg text-muted-foreground">Development tools and deployment platforms I use</p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+              {toolsIcons.map((tool, index) => (
+                <div
+                  key={tool.name}
+                  className="bg-purple-500/15 border border-purple-400/30 rounded-lg p-4 text-center transition-all duration-300 transform hover:scale-105 hover:bg-gray-500/20 hover:border-gray-400/30"
+                  style={{ animationDelay: `${0.1 * index}s` }}
+                >
+                  <div className="text-3xl mb-2">{tool.icon}</div>
+                  <p className="text-sm font-medium text-white">{tool.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ExperienceFlip;

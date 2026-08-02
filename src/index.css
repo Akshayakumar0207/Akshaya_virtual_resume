@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Portfolio Design System - Modern gradient theme inspired by the Pinterest design */
+
+@layer base {
+  :root {
+    --background: 240 10% 3%;
+    --background-secondary: 245 15% 6%;
+    --foreground: 0 0% 100%;
+
+    --card: 240 10% 8%;
+    --card-foreground: 0 0% 98%;
+    --card-hover: 220 10% 20%;
+
+    --popover: 240 10% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 285 85% 60%;
+    --primary-hover: 220 10% 40%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 10% 40%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 0 0% 85%;
+
+    --accent: 220 10% 40%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 10% 20%;
+    --input: 240 10% 15%;
+    --ring: 285 85% 60%;
+
+    --radius: 0.75rem;
+
+    /* Portfolio specific colors - Enhanced Purple Theme */
+    --hero-gradient-start: 285 85% 60%;
+    --hero-gradient-end: 270 80% 45%;
+    --section-gradient: 240 15% 8%;
+    --glass-bg: 240 10% 8%;
+    --glass-border: 240 15% 20%;
+    --skill-bg: 280 70% 35%;
+    --project-accent: 290 80% 55%;
+    --certificate-accent: 270 85% 65%;
+    --intern-accent: 285 90% 70%;
+    --tech-accent: 275 80% 60%;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--background-secondary)));
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--hero-gradient-start)), hsl(var(--hero-gradient-end)));
+  }
+  
+  .gradient-section {
+    background: linear-gradient(180deg, hsl(var(--section-gradient)), hsl(var(--background)));
+  }
+  
+  .glass-effect {
+    background: rgba(240, 10%, 8%, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+  
+  /* Text visibility fixes */
+  h1, h2, h3, h4, h5, h6, .heading-text {
+    color: white !important;
+  }
+  
+  .text-white {
+    color: white !important;
+  }
+  
+  .text-foreground {
+    color: white !important;
+  }
+  
+  .text-muted-foreground {
+    color: hsl(0 0% 85%) !important;
+  }
+  
+  /* Hover effects */
+  .hover\:bg-primary\/20:hover {
+    background-color: hsl(220 10% 40% / 0.2) !important;
+  }
+  
+  .hover\:text-white:hover {
+    color: white !important;
+  }
+  
+  .hover\:bg-card-hover:hover {
+    background-color: hsl(220 10% 20%) !important;
+  }
+  
+  .flip-card {
+    perspective: 1000px;
+    height: 400px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 0.75rem;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
