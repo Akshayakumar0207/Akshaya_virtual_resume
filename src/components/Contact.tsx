@@ -125,8 +125,31 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 gradient-section">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #1e1b4b 0%, #2d1b69 25%, #1a1a2e 50%, #16213e 75%, #1e1b4b 100%)',
+      backgroundSize: '400% 400%',
+      animation: 'gradient 20s ease infinite'
+    }}>
+      <style>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(3deg); }
+        }
+      `}</style>
+      
+      {/* Subtle animated gradient orbs */}
+      <div className="absolute inset-0 opacity-8">
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 8s ease-in-out infinite' }}></div>
+        <div className="absolute top-40 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 10s ease-in-out infinite 1s' }}></div>
+        <div className="absolute -bottom-8 left-1/2 w-96 h-96 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 9s ease-in-out infinite 2s' }}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16 animate-fade-in-up">

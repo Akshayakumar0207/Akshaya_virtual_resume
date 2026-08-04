@@ -53,8 +53,36 @@ const About = () => {
   void certLnT; void certIIT; void certIBMUiUx;
 
   return (
-    <section id="about" className="py-20 gradient-section">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-20 relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 25%, #1a1a2e 50%, #16213e 75%, #0f172a 100%)',
+      backgroundSize: '400% 400%',
+      animation: 'gradient 20s ease infinite'
+    }}>
+      <style>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        @keyframes timeline-glow {
+          0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+          50% { box-shadow: 0 0 20px 10px rgba(168, 85, 247, 0.3); }
+          100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+        }
+      `}</style>
+      
+      {/* Subtle animated gradient orbs */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-purple-500 to-purple-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 8s ease-in-out infinite' }}></div>
+        <div className="absolute top-40 right-10 w-96 h-96 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 10s ease-in-out infinite 1s' }}></div>
+        <div className="absolute -bottom-8 left-20 w-96 h-96 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 9s ease-in-out infinite 2s' }}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16 animate-fade-in-up">
@@ -82,38 +110,59 @@ const About = () => {
                   </div>
                 </div>
                 <p className="text-lg leading-relaxed text-muted-foreground">
-                  I'm a dedicated Computer Science Engineering student with a passion for creating innovative
-                  digital solutions. My journey in technology spans from frontend development with modern
-                  frameworks to backend systems and mobile applications. I have hands-on experience with
-                  full-stack development, machine learning projects, and have contributed to various research
-                  initiatives. My goal is to leverage technology to solve real-world problems and create
-                  meaningful impact through code.
+                  Fresher seeking my first job in Software Developer, Python Developer and Full Stack Developer roles. 
+                  I'm a dedicated Computer Science Engineering graduate with hands-on experience in full-stack web development, 
+                  mobile applications, and emerging technologies. I have worked on production-grade applications including 
+                  restaurant reservation systems and real-time collaboration platforms. My passion lies in building innovative 
+                  digital solutions and leveraging technology to solve real-world problems through clean, efficient code.
                 </p>
               </CardContent>
             </Card>
           </div>
 
-          {/* Education Pipeline */}
+          {/* Education Timeline with Glow Effect */}
           <div className="mb-16 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <h3 className="text-3xl font-bold mb-12 text-center text-white">Education</h3>
-            <div className="flex flex-col items-center justify-center gap-8 max-w-2xl mx-auto">
+            <h3 className="text-3xl font-bold mb-12 text-center text-white">Education Journey</h3>
+            
+            {/* Timeline path line */}
+            <div className="flex flex-col items-center gap-8 max-w-5xl mx-auto">
+              {/* Vertical connecting line */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-purple-500 via-purple-400 to-transparent h-96 opacity-30"></div>
+              
               {education.map((edu, index) => (
-                <div key={index} className="w-full" style={{ maxWidth: '350px' }}>
-                  <Card className={`bg-purple-500/20 border-purple-400/30 border transition-all duration-300 hover:bg-gray-500/20 hover:border-gray-400/30 transform hover:scale-105 ${edu.current ? 'ring-2 ring-purple-400' : ''}`}>
-                    <CardContent className="p-6 min-h-[14rem] flex flex-col justify-between">
+                <div key={index} className="w-full relative" style={{ maxWidth: '550px' }}>
+                  {/* Timeline node */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2">
+                    <div className="w-6 h-6 rounded-full bg-purple-500 border-4 border-purple-400 shadow-lg" style={{ 
+                      animation: index === 0 ? 'timeline-glow 2s ease-in-out infinite' : 'none'
+                    }}></div>
+                  </div>
+                  
+                  <Card className={`bg-gradient-to-r from-purple-900/20 to-purple-800/20 border border-purple-400/40 transition-all duration-300 hover:from-purple-900/30 hover:to-purple-800/30 hover:border-purple-400/60 transform hover:scale-102 ${edu.current ? 'ring-2 ring-purple-500 shadow-lg shadow-purple-500/30' : ''}`}>
+                    <CardContent className="p-8 min-h-[16rem] flex flex-col justify-between">
                       <div className="flex flex-col gap-3">
-                        <h4 className="text-lg font-semibold text-white">{edu.degree}</h4>
-                        <p className="text-purple-200">{edu.institution}</p>
-                        <div className="flex flex-wrap items-center gap-2">
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <h4 className="text-xl font-bold text-white">{edu.degree}</h4>
+                            <p className="text-purple-200 mt-1 flex items-center gap-2">
+                              <MapPin size={14} />
+                              {edu.institution}
+                            </p>
+                          </div>
+                          {edu.current && (
+                            <span className="px-3 py-1 bg-purple-500/40 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">Current</span>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3 mt-4">
                           <Badge variant="outline" className="flex items-center gap-1 border-purple-400 text-purple-200">
                             <Calendar size={12} />
                             {edu.period}
                           </Badge>
-                          <Badge className="bg-purple-400/40 text-white border-purple-400/50">{edu.score}</Badge>
+                          <Badge className="bg-purple-500/40 text-purple-100 border border-purple-400/50">{edu.score}</Badge>
                         </div>
                       </div>
                       {edu.current && (
-                        <Badge className="bg-purple-500 text-white mt-2 w-fit">Completed Fresher</Badge>
+                        <Badge className="bg-gradient-to-r from-purple-500 to-purple-600 text-white mt-4 w-fit border border-purple-400">✓ {edu.status}</Badge>
                       )}
                     </CardContent>
                   </Card>

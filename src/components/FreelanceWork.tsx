@@ -26,10 +26,29 @@ const FreelanceWork = () => {
   ];
 
   return (
-    <section id="freelance" className="py-20 gradient-section relative overflow-hidden">
-      {/* Glow background effect */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl opacity-40"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl opacity-40"></div>
+    <section id="freelance" className="py-20 relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #2d1b69 0%, #4c1d95 25%, #2d1b69 50%, #2d1b69 75%, #2d1b69 100%)',
+      backgroundSize: '400% 400%',
+      animation: 'gradient 20s ease infinite'
+    }}>
+      <style>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(3deg); }
+        }
+      `}</style>
+      
+      {/* Subtle animated gradient orbs */}
+      <div className="absolute inset-0 opacity-8">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-amber-500 to-amber-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 8s ease-in-out infinite' }}></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 10s ease-in-out infinite 1s' }}></div>
+        <div className="absolute top-1/2 right-10 w-96 h-96 bg-gradient-to-br from-orange-500 to-orange-700 rounded-full mix-blend-screen filter blur-3xl" style={{ animation: 'float-slow 9s ease-in-out infinite 2s' }}></div>
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
